@@ -137,7 +137,7 @@
                     </button>
                     <button
                       class="btn btn-danger"
-                      @click="deleteProduct(product, index)"
+                      @click="deleteTHELessons(product, index)"
                     >
                       Delete the Lesson
                     </button>
@@ -147,12 +147,12 @@
             </div>
           </div>
         </div>
-        <h3 class="mt-3" v-if="selectedProduct.length">Shopping Cart</h3>
+        <h3 class="mt-3" v-if="lessonsLIST.length">Shopping Cart</h3>
         <div
           class="d-flex flex-wrap w-100 justify-content-between"
-          v-if="selectedProduct.length"
+          v-if="lessonsLIST.length"
         >
-          <div class=" me-1 card" v-for="(product, index) in selectedProduct">
+          <div class=" me-1 card" v-for="(product, index) in lessonsLIST">
             <div class="card-body">
               <img :src="product.img" class="card-img-top" alt="..." />
               <div class="mt-2 d-flex flex-column justify-content-between">
@@ -221,7 +221,7 @@ export default {
       isBtn: false,
       showMsg: false,
       listOfProduct: [],
-      selectedProduct: [],
+      lessonsLIST: [],
       toShowSelectedProduct: [],
       isAscDec: "asc",
       ascDecs: 1,
@@ -308,7 +308,7 @@ export default {
           console.log("s", res1);
         });
     },
-    deleteProduct(product, index) {
+    deleteTHELessons(product, index) {
       fetch(`http://localhost:3000/lessons/${product._id}`, {
         method: "DELETE",
         data: {
@@ -348,7 +348,7 @@ export default {
           console.log("error", res1);
         });
     },
-    getOrders() {
+    getLessonsOrders() {
       fetch("http://localhost:3000/orders", {
         method: "GET"
       })
@@ -357,8 +357,8 @@ export default {
           return data;
         })
         .then(res => {
-          this.selectedProduct = [];
-          this.selectedProduct = res;
+          this.lessonsLIST = [];
+          this.lessonsLIST = res;
           console.log(res);
         })
         .catch(res1 => {
@@ -411,7 +411,7 @@ export default {
           .then(res => {
             console.log(res);
             this.getLessonsList();
-            this.getOrders();
+            this.getLessonsOrders();
           })
           .catch(error => {
             console.log(error);
