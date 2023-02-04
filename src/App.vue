@@ -174,7 +174,7 @@
                   <button
                     class="btn btn-primary  "
                     :disabled="isBtn"
-                    @click="removeFromCart(product, index)"
+                    @click="remove(product, index)"
                   >
                     Remove from cart
                   </button>
@@ -353,9 +353,6 @@ export default {
           this.lessonsLIST = [];
           this.lessonsLIST = res;
           console.log(res);
-        })
-        .catch(res1 => {
-          console.log("error", res1);
         });
     },
     sortByAscDec() {
@@ -367,18 +364,18 @@ export default {
     },
     sortList() {
       this.listOfProduct.sort((a, b) => {
-        let fa =
-          typeof a == "string"
-            ? a[this.sortSelected].toLowerCase()
-            : a[this.sortSelected];
-        let fb =
+        let B1 =
           typeof a == "string"
             ? b[this.sortSelected].toLowerCase()
             : b[this.sortSelected];
-        if (fa < fb) {
+        let A1 =
+          typeof a == "string"
+            ? a[this.sortSelected].toLowerCase()
+            : a[this.sortSelected];
+        if (A1 < B1) {
           return -1;
         }
-        if (fa > fb) {
+        if (A1 > B1) {
           return 1;
         }
         return 0;
@@ -405,15 +402,12 @@ export default {
             console.log(res);
             this.getLessonsList();
             this.getLessonsOrders();
-          })
-          .catch(error => {
-            console.log(error);
           });
       } else {
         this.showMsg = true;
       }
     },
-    removeFromCart(product, cart) {}
+    remove(product, cart) {}
   }
 };
 </script>
@@ -455,11 +449,7 @@ body {
   height: 2000px;
 }
 
-.form-check {
-  justify-content: space-between;
-  display: flex;
-  padding-left: 30px;
-}
+
 
 .card {
   max-height: 250px;
@@ -493,5 +483,11 @@ li {
 
 a {
   color: #42b983;
+}
+
+.form-check {
+  justify-content: space-between;
+  display: flex;
+  padding-left: 30px;
 }
 </style>
