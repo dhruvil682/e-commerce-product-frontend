@@ -311,13 +311,6 @@ export default {
     deleteTHELessons(product, index) {
       fetch(`http://localhost:3000/lessons/${product._id}`, {
         method: "DELETE",
-        data: {
-          name: "LCD",
-          topic: "new",
-          location: "new location",
-          price: 101,
-          space: 101
-        },
         headers: {
           "Access-Control-Allow-Headers": "Content-Type"
         }
