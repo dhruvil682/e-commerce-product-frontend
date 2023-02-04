@@ -184,7 +184,7 @@
           </div>
         </div>
         <h3>User Details</h3>
-        <h6 class="text-danger" v-if="showMsg">
+        <h6 class="text-danger" v-if="MESSAGE">
           Please Enter your User Detail
         </h6>
         <form class="mt-3">
@@ -217,16 +217,16 @@ export default {
   data() {
     return {
       searchRESUTEXT: "",
-      avalaibleProducts: 5,
       isBtn: false,
-      showMsg: false,
+      MESSAGE: false,
       listOfProduct: [],
       lessonsLIST: [],
+      isproduct: 10,
       toShowSelectedProduct: [],
       isAscDec: "asc",
       ascDecs: 1,
       sortSelected: "name",
-      searchValue: "",
+      searcedhValues: "",
       form: {
         name: "",
         number: ""
@@ -300,12 +300,12 @@ export default {
         }
       })
         .then(res => {
-          console.log("deleted successfully");
+          
           this.getLessonsList();
           return res;
         })
         .catch(res1 => {
-          console.log("s", res1);
+          
         });
     },
     deleteTHELessons(product, index) {
@@ -316,13 +316,11 @@ export default {
         }
       })
         .then(res => {
-          console.log("deleted successfully");
+          console.log("");
           this.getLessonsList();
           return res;
         })
-        .catch(res1 => {
-          console.log("s", res1);
-        });
+        
     },
     getLessonsList() {
       fetch("http://localhost:3000/lessons", {
@@ -335,10 +333,10 @@ export default {
         .then(res => {
           this.listOfProduct = [];
           this.listOfProduct = res;
-          console.log(res);
+          console.log('res');
         })
         .catch(res1 => {
-          console.log("error", res1);
+          console.log("errorsss");
         });
     },
     getLessonsOrders() {
@@ -385,7 +383,7 @@ export default {
     addToCart(product, index) {
       console.log(this.form, product);
       if (this.form.name && this.form.number) {
-        this.showMsg = false;
+        this.MESSAGE = false;
         let order = {
           name: this.form.name,
           phoneNumber: this.form.number,
@@ -404,7 +402,7 @@ export default {
             this.getLessonsOrders();
           });
       } else {
-        this.showMsg = true;
+        this.MESSAGE = true;
       }
     },
     remove(product, cart) {}
